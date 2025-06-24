@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard - Crawdwall Capital</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Load our modules -->
+    <script type="module" src="../js/supabase.js"></script>
+    <script type="module" src="../js/dashboard.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar will be added later -->
+        
+        <main class="dashboard-main">
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <h2>Welcome, <span id="user-firstname">there</span>! <br/>Ready to fund your next event?</h2>
+                        <p>Submit your proposal and track every step — from vetting to funding — all in one place.</p>
+                    </div>
+                    <div class="welcome-action">
+                        <div class="new-proposal-wrapper">
+                            <a href="new-proposal.html" class="primary-button new-proposal-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                New Proposal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="status-tracker-section">
+                <div class="status-card">
+                    <h2>Your Proposal Status</h2>
+                    
+                    <div class="status-timeline">
+                        <div class="status-step completed">
+                            <div class="status-icon">✅</div>
+                            <div class="status-label">Submitted</div>
+                            <div class="status-date">June 24, 2025</div>
+                        </div>
+                        
+                        <div class="status-step current">
+                            <div class="status-icon">🔍</div>
+                            <div class="status-label">Under Review</div>
+                            <div class="status-date">Current Stage</div>
+                        </div>
+                        
+                        <div class="status-step">
+                            <div class="status-icon">🟡</div>
+                            <div class="status-label">Vetted</div>
+                        </div>
+                        
+                        <div class="status-step">
+                            <div class="status-icon">📞</div>
+                            <div class="status-label">Callback Scheduled</div>
+                        </div>
+                        
+                        <div class="status-step">
+                            <div class="status-icon">🟢</div>
+                            <div class="status-label">Approved</div>
+                        </div>
+                    </div>
+
+                    <div class="status-message">
+                        <div class="status-message-icon">ℹ️</div>
+                        <p>Your proposal will be reviewed by our Vetting Board. You'll be notified once a decision is made.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="proposal-history-section">
+                <div class="history-card">
+                    <div class="history-header">
+                        <h2>
+                            <span class="header-icon">📂</span>
+                            Your Past Proposals
+                        </h2>
+                        <div class="history-filters">
+                            <div class="search-box">
+                                <input type="text" id="proposal-search" placeholder="Search proposals...">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="filter-group">
+                                <select id="status-filter">
+                                    <option value="">All Statuses</option>
+                                    <option value="submitted">Submitted</option>
+                                    <option value="under_review">Under Review</option>
+                                    <option value="vetted">Vetted</option>
+                                    <option value="callback_scheduled">Callback Scheduled</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                                <select id="date-sort">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="proposals-table-wrapper">
+                        <table class="proposals-table">
+                            <thead>
+                                <tr>
+                                    <th>Event Title</th>
+                                    <th>Date Submitted</th>
+                                    <th>Current Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="proposals-list">
+                                <!-- Table rows will be dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" style="display: none;">
+                        <div class="empty-icon">📋</div>
+                        <h3>No Proposals Yet</h3>
+                        <p>Submit your first proposal to get started!</p>
+                        <a href="new-proposal.html" class="primary-button">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            New Proposal
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="document-center-section">
+                <div class="document-card">
+                    <h2>📎 Proposal Files & Documents</h2>
+                    <p class="section-description">You can upload or re-upload important documents related to your event here. Only PDF or DOCX files are accepted.</p>
+                    
+                    <form id="document-upload-form" class="document-upload-form">
+                        <div class="upload-grid">
+                            <!-- Business Registration -->
+                            <div class="upload-field" data-doc-type="business-reg">
+                                <div class="upload-header">
+                                    <label>🗂 Business Registration Document (CAC)</label>
+                                    <span class="upload-timestamp"></span>
+                                </div>
+                                <div class="upload-dropzone" data-accepts=".pdf,.docx">
+                                    <input type="file" accept=".pdf,.docx" required>
+                                    <div class="dropzone-content">
+                                        <i class="upload-icon">📤</i>
+                                        <span>Drag & drop or click to upload</span>
+                                        <small>PDF or DOCX only</small>
+                                    </div>
+                                    <div class="file-preview hidden">
+                                        <i class="file-icon">📄</i>
+                                        <span class="file-name"></span>
+                                        <button type="button" class="remove-file">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pitch Deck -->
+                            <div class="upload-field" data-doc-type="pitch-deck">
+                                <div class="upload-header">
+                                    <label>📑 Pitch Deck or Event Brochure</label>
+                                    <span class="upload-timestamp"></span>
+                                </div>
+                                <div class="upload-dropzone" data-accepts=".pdf,.docx">
+                                    <input type="file" accept=".pdf,.docx" required>
+                                    <div class="dropzone-content">
+                                        <i class="upload-icon">📤</i>
+                                        <span>Drag & drop or click to upload</span>
+                                        <small>PDF or DOCX only</small>
+                                    </div>
+                                    <div class="file-preview hidden">
+                                        <i class="file-icon">📄</i>
+                                        <span class="file-name"></span>
+                                        <button type="button" class="remove-file">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Budget Breakdown -->
+                            <div class="upload-field" data-doc-type="budget">
+                                <div class="upload-header">
+                                    <label>🧾 Budget Breakdown</label>
+                                    <span class="upload-timestamp"></span>
+                                </div>
+                                <div class="upload-dropzone" data-accepts=".pdf,.docx">
+                                    <input type="file" accept=".pdf,.docx" required>
+                                    <div class="dropzone-content">
+                                        <i class="upload-icon">📤</i>
+                                        <span>Drag & drop or click to upload</span>
+                                        <small>PDF or DOCX only</small>
+                                    </div>
+                                    <div class="file-preview hidden">
+                                        <i class="file-icon">📄</i>
+                                        <span class="file-name"></span>
+                                        <button type="button" class="remove-file">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bank Letter (Optional) -->
+                            <div class="upload-field" data-doc-type="bank-letter">
+                                <div class="upload-header">
+                                    <label>🏦 Bank Confirmation Letter <span class="optional-tag">(Optional)</span></label>
+                                    <span class="upload-timestamp"></span>
+                                </div>
+                                <div class="upload-dropzone" data-accepts=".pdf,.docx">
+                                    <input type="file" accept=".pdf,.docx">
+                                    <div class="dropzone-content">
+                                        <i class="upload-icon">📤</i>
+                                        <span>Drag & drop or click to upload</span>
+                                        <small>PDF or DOCX only</small>
+                                    </div>
+                                    <div class="file-preview hidden">
+                                        <i class="file-icon">📄</i>
+                                        <span class="file-name"></span>
+                                        <button type="button" class="remove-file">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="upload-actions">
+                            <button type="submit" class="primary-button upload-submit-btn">
+                                <i>📤</i> Upload/Update Documents
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            <section class="funding-offer-section" id="funding-offer">
+                <div class="funding-offer-card">
+                    <div class="funding-header">
+                        <h2>💼 Your Funding Offer</h2>
+                        <div class="offer-status">
+                            <span class="status-pill success">Approved</span>
+                        </div>
+                    </div>
+
+                    <div class="funding-amount">
+                        <label>Approved Funding Amount</label>
+                        <h3>₦10,000,000</h3>
+                    </div>
+
+                    <div class="milestone-plan">
+                        <h4>Milestone Disbursement Plan</h4>
+                        <div class="milestone-table">
+                            <div class="milestone-row">
+                                <div class="milestone-info">
+                                    <span class="milestone-name">Initial Release</span>
+                                    <span class="milestone-desc">Upon contract signing</span>
+                                </div>
+                                <div class="milestone-amount">₦3,000,000</div>
+                            </div>
+                            <div class="milestone-row">
+                                <div class="milestone-info">
+                                    <span class="milestone-name">Milestone 1</span>
+                                    <span class="milestone-desc">Event venue & vendor contracts</span>
+                                </div>
+                                <div class="milestone-amount">₦4,000,000</div>
+                            </div>
+                            <div class="milestone-row">
+                                <div class="milestone-info">
+                                    <span class="milestone-name">Final Milestone</span>
+                                    <span class="milestone-desc">Post-event report submission</span>
+                                </div>
+                                <div class="milestone-amount">₦3,000,000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contract-download">
+                        <a href="#" class="download-link" download>
+                            <span class="icon">📄</span>
+                            Download Agreement (PDF)
+                        </a>
+                    </div>
+
+                    <div class="offer-actions">
+                        <button class="primary-button accept-offer">
+                            <span class="icon">✅</span>
+                            Accept Offer
+                        </button>
+                        <button class="secondary-button request-changes">
+                            <span class="icon">✏️</span>
+                            Request Changes
+                        </button>
+                    </div>
+
+                    <!-- Success Message (hidden by default) -->
+                    <div class="offer-success hidden">
+                        <div class="success-icon">🎉</div>
+                        <p>Your offer has been accepted. We'll begin onboarding and fund disbursement soon!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="notification-feed-section">
+                <div class="notification-card">
+                    <div class="notification-header">
+                        <h2>🔔 Notifications</h2>
+                        <div class="notification-actions">
+                            <button class="mark-all-read">Mark All as Read</button>
+                            <button class="clear-all">Clear All</button>
+                        </div>
+                    </div>
+
+                    <div class="notification-list" id="notification-list">
+                        <!-- Notifications will be dynamically inserted here -->
+                        <div class="empty-notifications hidden">
+                            <div class="empty-icon">🔕</div>
+                            <p>No new notifications</p>
+                        </div>
+                    </div>
+
+                    <!-- Notification Template (hidden, used by JavaScript) -->
+                    <template id="notification-template">
+                        <div class="notification-item">
+                            <div class="notification-icon"></div>
+                            <div class="notification-content">
+                                <p class="notification-message"></p>
+                                <span class="notification-time"></span>
+                            </div>
+                            <button class="mark-read" title="Mark as read">
+                                <span class="unread-dot"></span>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </section>
+            
+            <footer class="help-support-footer" id="help-support">
+                <div class="help-support-content">
+                    <div class="help-support-info">
+                        <div class="help-support-header">
+                            <span class="help-icon">❓</span>
+                            <div class="help-text">
+                                <h3>Need help with your application?</h3>
+                                <p>Our support team is here to guide you through.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="help-actions">
+                        <button class="support-button contact-support">
+                            <span class="icon">💬</span>
+                            Contact Support
+                        </button>
+                        <button class="support-button book-call">
+                            <span class="icon">📅</span>
+                            Book a Call
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Help & Support Footer -->
+        
+
+        <!-- Proposal Detail Modal -->
+        
+
+        <!-- Other dashboard sections will be added here -->
+    </div>
+</body>
+</html>

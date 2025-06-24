@@ -1,28 +1,53 @@
 :root {
   /* Primary Colors */
-  --color-primary: #0B1E39;
-  --color-secondary: #FFFFFF;
+  --navy-blue: #0B1E39;
+  --navy-blue-80: rgba(11, 30, 57, 0.8);
+  --navy-blue-60: rgba(11, 30, 57, 0.6);
+
+  /* Secondary Colors */
+  --white: #FFFFFF;
 
   /* Accent Colors */
-  --color-accent-grey: #F5F7FA;
-  --color-accent-blue: #E6EDF6;
+  --soft-grey: #F5F7FA;
+  --muted-blue: #E6EDF6;
 
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Font Family */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(11, 30, 57, 0.04);
+  --shadow-md: 0 2px 4px rgba(11, 30, 57, 0.04);
+  --shadow-lg: 0 4px 6px rgba(11, 30, 57, 0.04);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 
   /* Semantic Colors */
-  --color-background: var(--color-secondary);
-  --color-text: var(--color-primary);
-  --color-button: var(--color-primary);
-  --color-hover-background: var(--color-accent-blue);
-  --color-surface: var(--color-accent-grey);
+  --color-background: var(--white);
+  --color-text: var(--navy-blue);
+  --color-button: var(--navy-blue);
+  --color-hover-background: var(--muted-blue);
+  --color-surface: var(--soft-grey);
 }
 
 /* Usage Example Classes */
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-accent-grey { background-color: var(--color-accent-grey); }
-.bg-accent-blue { background-color: var(--color-accent-blue); }
+.bg-primary { background-color: var(--navy-blue); }
+.bg-secondary { background-color: var(--white); }
+.bg-accent-grey { background-color: var(--soft-grey); }
+.bg-accent-blue { background-color: var(--muted-blue); }
 
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
+.text-primary { color: var(--navy-blue); }
+.text-secondary { color: var(--white); }

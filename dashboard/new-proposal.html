@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit New Proposal - Crawdwall Capital</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Load our modules -->
+    <script type="module" src="../js/supabase.js"></script>
+    <script type="module" src="../js/proposal.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar will be added later -->
+        
+        <main class="dashboard-main">
+            <section class="proposal-section">
+                <div class="back-button">
+                    <a href="organizer.html" class="back-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M15.833 10H4.167M4.167 10l5 5M4.167 10l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back to Dashboard
+                    </a>
+                </div>
+
+                <div class="proposal-card">
+                    <h1>Submit a New Proposal</h1>
+                    <p class="proposal-intro">We're excited to learn about your event. Please fill out the details below. The more clarity you provide, the faster we can assess your request.</p>
+                    
+                    <form id="proposal-form" class="proposal-form">
+                        <div class="form-grid">
+                            <!-- Basic Information -->
+                            <div class="form-group">
+                                <label for="event-title">Event Title*</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="event-title" name="event-title" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="organizer-name">Organizer/Company Name*</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="organizer-name" name="organizer-name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address*</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number*</label>
+                                <div class="input-wrapper">
+                                    <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event-type">Event Type*</label>
+                                <div class="input-wrapper">
+                                    <select id="event-type" name="event-type" required>
+                                        <option value="">Select event type</option>
+                                        <option value="conference">Conference</option>
+                                        <option value="concert">Concert</option>
+                                        <option value="exhibition">Exhibition</option>
+                                        <option value="festival">Festival</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="event-description">Event Description*</label>
+                                <div class="input-wrapper">
+                                    <textarea id="event-description" name="event-description" rows="4" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event-date">Proposed Event Date*</label>
+                                <div class="input-wrapper">
+                                    <input type="date" id="event-date" name="event-date" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="attendees">Expected Number of Attendees*</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="attendees" name="attendees" min="1" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="budget">Total Budget (₦)*</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="budget" name="budget" min="0" step="1000" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="revenue">Expected Revenue (₦)*</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="revenue" name="revenue" min="0" step="1000" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="proposal-doc">Upload Proposal Document* (PDF only)</label>
+                                <div class="input-wrapper file-input">
+                                    <input type="file" id="proposal-doc" name="proposal-doc" accept=".pdf" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="pitch-video">Optional Pitch Video (YouTube/Vimeo URL)</label>
+                                <div class="input-wrapper">
+                                    <input type="url" id="pitch-video" name="pitch-video" placeholder="https://...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <div id="error-message" class="error-message" style="display: none;"></div>
+                            <div id="success-message" class="success-message" style="display: none;"></div>
+                            <button type="submit" class="submit-button">
+                                📨 Submit for Review
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
