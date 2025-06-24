@@ -1,0 +1,813 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    color: var(--color-primary);
+    line-height: 1.5;
+    background-color: var(--color-secondary);
+    padding-top: 6rem;
+}
+
+/* Hero section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.hero__content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero__title-highlight {
+    display: block;
+    color: var(--color-primary);
+}
+
+.hero__subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #4A5568;
+    margin-bottom: 2.5rem;
+}
+
+.hero__illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CTA Button */
+.hero-cta,
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-cta:hover,
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(11, 30, 57, 0.15);
+}
+
+.cta-button--large {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .hero__container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero__title {
+        font-size: 2.5rem;
+    }
+
+    .hero__illustration svg {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.125rem;
+    }
+
+    .hero__illustration svg {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Header Section */
+.header {
+    position: fixed;
+    top: 1.5rem;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 2rem;
+}
+
+.header .container {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 16px;
+    padding: 1.5rem 3rem;
+    box-shadow: 0 8px 24px rgba(11, 30, 57, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.nav-brand {
+    flex-shrink: 0;
+}
+
+.nav-brand .logo {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-cta {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 30, 57, 0.15);
+}
+
+/* Responsive Design for Header */
+@media (max-width: 768px) {
+    .header {
+        top: 1rem;
+        padding: 0 1rem;
+    }
+
+    .header .container {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-brand .logo,
+    .footer-logo .logo {
+        height: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-brand .logo,
+    .footer-logo .logo {
+        height: 60px;
+    }
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 6rem 2rem;
+    background-color: var(--color-secondary);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4rem;
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+}
+
+/* Add connecting lines between steps */
+.steps-container::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background-color: var(--color-accent-blue);
+    z-index: 0;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1.5rem;
+    background-color: var(--color-secondary);
+}
+
+.step__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.step__description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4A5568;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+/* Responsive Design for How It Works */
+@media (max-width: 968px) {
+    .steps-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem 2rem;
+    }
+
+    .steps-container::before {
+        display: none;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .steps-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .how-it-works {
+        padding: 4rem 1.5rem;
+    }
+
+    .step__description {
+        max-width: 300px;
+    }
+}
+
+/* Who It's For Section */
+.who-its-for {
+    padding: 6rem 2rem;
+    background-color: var(--color-accent-grey);
+}
+
+.audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.audience-card {
+    background-color: var(--color-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.audience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(11, 30, 57, 0.1);
+}
+
+.audience-card__icon {
+    margin-bottom: 1.5rem;
+}
+
+.audience-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.audience-card__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4A5568;
+}
+
+/* Responsive Design for Who It's For */
+@media (max-width: 968px) {
+    .audience-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .who-its-for {
+        padding: 4rem 1.5rem;
+    }
+
+    .audience-card {
+        padding: 1.5rem;
+    }
+
+    .audience-card__title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Why Crawdwall Section */
+.why-crawdwall {
+    padding: 6rem 2rem;
+    background-color: var(--color-secondary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.feature-card {
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-accent-grey);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent-blue));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(11, 30, 57, 0.08);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card__icon {
+    margin-bottom: 1.5rem;
+}
+
+.feature-card__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.feature-card__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4A5568;
+    margin-bottom: 1.5rem;
+}
+
+.feature-card__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #4A5568;
+}
+
+/* Responsive Design for Why Crawdwall */
+@media (max-width: 968px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 0 auto;
+        gap: 2rem;
+    }
+
+    .why-crawdwall {
+        padding: 4rem 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .feature-card__title {
+        font-size: 1.25rem;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+}
+
+/* CTA Banner Section */
+.floating-cta {
+    position: relative;
+    margin-top: -4rem;
+    margin-bottom: 8rem;
+    padding: 0 2rem;
+}
+
+.floating-cta .container {
+    background: linear-gradient(135deg, #2C5282, #2B6CB0);
+    border-radius: 16px;
+    padding: 4rem;
+    box-shadow: 0 20px 40px rgba(11, 30, 57, 0.1);
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-title {
+    color: var(--color-secondary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.cta-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button--large {
+    font-size: 1.25rem;
+    padding: 1.25rem 2.5rem;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.cta-button--large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.button-icon {
+    transition: transform 0.3s ease;
+}
+
+.cta-button--large:hover .button-icon {
+    transform: translateX(4px);
+}
+
+/* Responsive Design for CTA Banner */
+@media (max-width: 768px) {
+    .floating-cta {
+        margin: -2rem 1rem 4rem;
+    }
+
+    .floating-cta .container {
+        padding: 2rem;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+
+    .cta-description {
+        font-size: 1.125rem;
+        padding: 0;
+    }
+
+    .cta-button--large {
+        font-size: 1.125rem;
+        padding: 1rem 2rem;
+    }
+}
+
+/* FAQ Section */
+.faq {
+    padding: 6rem 2rem;
+    background-color: var(--color-secondary);
+}
+
+.faq-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    border: 1px solid var(--color-accent-grey);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 12px rgba(11, 30, 57, 0.05);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.question-text {
+    flex: 1;
+}
+
+.chevron-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-question[aria-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    color: #4A5568;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.faq-answer[hidden] {
+    display: none;
+}
+
+/* Animation for answer reveal */
+.faq-answer:not([hidden]) {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design for FAQ */
+@media (max-width: 768px) {
+    .faq {
+        padding: 4rem 1.5rem;
+    }
+
+    .faq-question {
+        padding: 1.25rem;
+        font-size: 1rem;
+    }
+
+    .faq-answer {
+        padding: 0 1.25rem 1.25rem;
+    }
+}
+
+/* Footer Section */
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding-bottom: 2rem;
+    position: relative;
+}
+
+.footer-content {
+    padding-top: 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-logo {
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+}
+
+.footer-logo .logo {
+    height: 80px;
+    width: auto;
+    filter: brightness(0) invert(1); /* Makes the logo white for the dark footer */
+}
+
+.footer-tagline {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.footer-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-menu a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.footer-menu a:hover {
+    opacity: 1;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-icon {
+    color: var(--color-secondary);
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.copyright {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design for Footer */
+@media (max-width: 768px) {
+    .footer {
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-logo {
+        justify-content: center;
+        display: flex;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}

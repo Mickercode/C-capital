@@ -1,0 +1,28 @@
+:root {
+  /* Primary Colors */
+  --color-primary: #0B1E39;
+  --color-secondary: #FFFFFF;
+
+  /* Accent Colors */
+  --color-accent-grey: #F5F7FA;
+  --color-accent-blue: #E6EDF6;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Semantic Colors */
+  --color-background: var(--color-secondary);
+  --color-text: var(--color-primary);
+  --color-button: var(--color-primary);
+  --color-hover-background: var(--color-accent-blue);
+  --color-surface: var(--color-accent-grey);
+}
+
+/* Usage Example Classes */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent-grey { background-color: var(--color-accent-grey); }
+.bg-accent-blue { background-color: var(--color-accent-blue); }
+
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Crawdwall Capital</title>
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/forms.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Load our modules -->
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/signin.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-logo">
+                <img src="styles/assest/Images/C-capital_Logo-removebg-preview.png" alt="Crawdwall Capital Logo" class="logo">
+            </div>
+
+            <h1>Sign In</h1>
+            <p class="form-subtitle">Welcome back! Please enter your details.</p>
+
+            <form class="form" id="signin-form" onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2.5 6.67v6.66c0 1.84 1.5 3.34 3.33 3.34h8.34c1.83 0 3.33-1.5 3.33-3.34V6.67c0-1.84-1.5-3.34-3.33-3.34H5.83c-1.83 0-3.33 1.5-3.33 3.34z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2.5 7.5l6.67 3.33c.83.42 1.83.42 2.66 0L18.5 7.5" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 8.33V6.67C5 4.17 5.83 2.5 10 2.5c4.17 0 5 1.67 5 4.17v1.66" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 15.42c-1.15 0-2.08-.93-2.08-2.09 0-1.15.93-2.08 2.08-2.08 1.16 0 2.08.93 2.08 2.08 0 1.16-.92 2.09-2.08 2.09z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 17.5c4.17 0 5.83-1.67 5.83-5.83 0-4.17-1.66-5.84-5.83-5.84-4.17 0-5.83 1.67-5.83 5.84 0 4.16 1.66 5.83 5.83 5.83z" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span class="checkbox-custom"></span>
+                        Remember me
+                    </label>
+                    <a href="#" onclick="handleForgotPassword(event)" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <div id="error-message" class="error-message" style="display: none;"></div>
+                <div id="success-message" class="success-message" style="display: none;"></div>
+
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+
+            <p class="form-footer">
+                Don't have an account? <a href="signup.html">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Check auth state on page load
+        window.addEventListener('load', async () => {
+            const user = await checkAuth()
+            if (user) {
+                // If already logged in, redirect to appropriate dashboard
+                const userType = user.user_metadata.user_type
+                if (userType === 'organizer') {
+                    window.location.href = '/dashboard/organizer.html'
+                } else {
+                    window.location.href = '/dashboard/admin.html'
+                }
+            }
+        })
+
+        async function handleSignIn(event) {
+            event.preventDefault()
+            
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            const errorDiv = document.getElementById('error-message')
+            const successDiv = document.getElementById('success-message')
+            
+            errorDiv.style.display = 'none'
+            successDiv.style.display = 'none'
+            
+            const result = await signIn(email, password)
+            
+            if (result?.error) {
+                errorDiv.textContent = result.error
+                errorDiv.style.display = 'block'
+            }
+        }
+
+        async function handleForgotPassword(event) {
+            event.preventDefault()
+            
+            const email = document.getElementById('email').value
+            const errorDiv = document.getElementById('error-message')
+            const successDiv = document.getElementById('success-message')
+            
+            if (!email) {
+                errorDiv.textContent = 'Please enter your email address'
+                errorDiv.style.display = 'block'
+                return
+            }
+            
+            errorDiv.style.display = 'none'
+            successDiv.style.display = 'none'
+            
+            const result = await resetPassword(email)
+            
+            if (result?.error) {
+                errorDiv.textContent = result.error
+                errorDiv.style.display = 'block'
+            } else if (result?.message) {
+                successDiv.textContent = result.message
+                successDiv.style.display = 'block'
+            }
+        }
+    </script>
+</body>
+</html>
