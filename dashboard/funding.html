@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding Management | Crawdwall Capital</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="../styles/funding.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="../styles/assest/Images/C-capital_Logo-removebg-preview.png" alt="C-capital Logo">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="admin.html">
+                    <span class="icon">📋</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="admin-proposals.html">
+                    <span class="icon">📝</span>
+                    Proposals
+                </a>
+            </li>
+            <li>
+                <a href="admin-organizers.html">
+                    <span class="icon">👥</span>
+                    Organizers
+                </a>
+            </li>
+            <li class="active">
+                <a href="funding.html">
+                    <span class="icon">💰</span>
+                    Funding
+                </a>
+            </li>
+            <li>
+                <a href="admin-settings.html">
+                    <span class="icon">⚙️</span>
+                    Settings
+                </a>
+            </li>
+        </ul>
+        <div class="admin-profile">
+            <div class="profile-info">
+                <span class="admin-avatar">👤</span>
+                <div class="admin-details">
+                    <span class="admin-name">Admin</span>
+                    <span class="admin-role">Super Admin</span>
+                </div>
+            </div>
+            <button class="logout-button">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Funding Management Header -->
+        <section class="page-header funding-header">
+            <div class="header-content">
+                <h1><span class="header-icon">💰</span> Funding Management</h1>
+                <p class="header-description">Track funding allocations, monitor disbursement stages, and oversee returns — all in one secure view.</p>
+            </div>
+            
+            <!-- Stats Summary Bar -->
+            <div class="stats-summary-bar">
+                <div class="summary-stat">
+                    <span class="stat-label">Total Funded</span>
+                    <span class="stat-value">₦80M</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-label">Active Events</span>
+                    <span class="stat-value">12</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-value">3</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-label">ROI</span>
+                    <span class="stat-value">18%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Filter Bar -->
+        <div class="sticky-filter-bar">
+            <div class="filter-group">
+                <label for="date-range-picker">📅 Date Range</label>
+                <input type="text" id="date-range-picker" class="date-range-picker" placeholder="Select date range">
+            </div>
+            
+            <div class="filter-group">
+                <label for="milestone-status">🔘 Milestone Status</label>
+                <select id="milestone-status" class="filter-select">
+                    <option value="all">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="roi-tier">🟢 ROI Tier</label>
+                <select id="roi-tier" class="filter-select">
+                    <option value="all">All Tiers</option>
+                    <option value="low">&lt;10%</option>
+                    <option value="medium">10–30%</option>
+                    <option value="high">&gt;30%</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="search-field">🔍 Search</label>
+                <input type="text" id="search-field" class="search-field" placeholder="Event or Organizer name">
+            </div>
+            
+            <button id="apply-filters" class="primary-button">Apply Filters</button>
+            <button id="reset-filters" class="secondary-button">Reset</button>
+        </div>
+
+        <!-- Funding Content will go here -->
+        <section class="funding-management">
+            <div class="section-header">
+                <h2>📊 Active Funding</h2>
+                <div class="table-actions">
+                    <div class="search-box">
+                        <input type="text" id="funding-search" placeholder="Search...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <div class="filter-box">
+                        <select id="status-filter">
+                            <option value="">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table" id="funding-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="id">ID</th>
+                            <th class="sortable" data-sort="eventTitle">Event</th>
+                            <th class="sortable" data-sort="organizer">Organizer</th>
+                            <th class="sortable" data-sort="amount">Amount</th>
+                            <th class="sortable" data-sort="status">Status</th>
+                            <th class="sortable" data-sort="date">Date</th>
+                            <th class="sortable" data-sort="roi">ROI</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="funding-table-body">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <div class="entries-info">
+                    Showing <span id="showing-start">1</span> to <span id="showing-end">10</span> of <span id="total-entries">0</span> entries
+                </div>
+                <div class="pagination">
+                    <button id="prev-page" class="pagination-btn" disabled>Previous</button>
+                    <div id="page-numbers" class="page-numbers">
+                        <!-- Page numbers will be populated by JavaScript -->
+                    </div>
+                    <button id="next-page" class="pagination-btn" disabled>Next</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funding Details Modal -->
+        <div id="funding-detail-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-event-title">Event Title</h2>
+                    <button class="close-modal">×</button>
+                </div>
+                
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="overview-tab">Overview</button>
+                    <button class="tab-btn" data-tab="milestones-tab">Milestones</button>
+                    <button class="tab-btn" data-tab="documents-tab">Documents</button>
+                    <button class="tab-btn" data-tab="notes-tab">Notes</button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Overview Tab -->
+                    <div id="overview-tab" class="tab-pane active">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Event Title</label>
+                                <p id="overview-title">-</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Organizer</label>
+                                <p id="overview-organizer">-</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Total Budget</label>
+                                <p id="overview-budget">-</p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Status</label>
+                                <p id="overview-status">-</p>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-section">
+                            <h3>Funding Summary</h3>
+                            <p id="overview-summary">-</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestones Tab -->
+                    <div id="milestones-tab" class="tab-pane">
+                        <h3>Approved Milestone Plan</h3>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Milestone</th>
+                                        <th>Amount</th>
+                                        <th>Purpose</th>
+                                        <th>Release Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="milestone-table-body">
+                                    <!-- Milestone rows will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Documents Tab -->
+                    <div id="documents-tab" class="tab-pane">
+                        <div class="document-upload">
+                            <h3>Upload Documents</h3>
+                            <form id="document-upload-form">
+                                <div class="form-group">
+                                    <label for="document-type">Document Type</label>
+                                    <select id="document-type" required>
+                                        <option value="">Select type</option>
+                                        <option value="bank-confirmation">Bank Confirmation</option>
+                                        <option value="receipt">Receipt</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="report">Financial Report</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="document-title">Document Title</label>
+                                    <input type="text" id="document-title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="document-file">Select File</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="document-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.png">
+                                        <span id="selected-document">No file selected</span>
+                                        <button type="button" class="browse-button">Browse</button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="primary-button">Upload Document</button>
+                            </form>
+                        </div>
+                        
+                        <div class="document-list">
+                            <h3>Uploaded Documents</h3>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Document</th>
+                                            <th>Type</th>
+                                            <th>Date Uploaded</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="document-list-body">
+                                        <!-- Document rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes Tab -->
+                    <div id="notes-tab" class="tab-pane">
+                        <div class="add-note">
+                            <h3>Add Internal Note</h3>
+                            <form id="add-note-form">
+                                <div class="form-group">
+                                    <textarea id="note-content" placeholder="Add update or note..." required></textarea>
+                                </div>
+                                <button type="submit" class="primary-button">Add Note</button>
+                            </form>
+                        </div>
+                        
+                        <div class="notes-list">
+                            <h3>Update Log</h3>
+                            <div id="notes-list">
+                                <!-- Notes will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="modal-actions">
+                        <button class="secondary-button back-to-table">↩️ Back to Table</button>
+                        <button class="primary-button save-changes">💾 Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funding Row Template -->
+        <template id="funding-row-template">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="status-badge"></span></td>
+                <td></td>
+                <td></td>
+                <td class="row-actions">
+                    <button class="action-btn disburse-milestone" title="Disburse Milestone">
+                        <span class="icon">📤</span>
+                    </button>
+                    <button class="action-btn view-financial-report" title="View Financial Report">
+                        <span class="icon">🧾</span>
+                    </button>
+                    <button class="action-btn mark-repayment-complete" title="Mark Repayment Complete">
+                        <span class="icon">✅</span>
+                    </button>
+                    <button class="action-btn update-disbursement-info" title="Update Disbursement Info">
+                        <span class="icon">✏️</span>
+                    </button>
+                </td>
+            </tr>
+        </template>
+    </main>
+
+    <script src="../js/funding.js"></script>
+</body>
+</html>

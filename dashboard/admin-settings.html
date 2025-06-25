@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings | Crawdwall Capital</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="../styles/assest/Images/C-capital_Logo-removebg-preview.png" alt="C-capital Logo">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="admin.html">
+                    <span class="icon">📋</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="admin-proposals.html">
+                    <span class="icon">📝</span>
+                    Proposals
+                </a>
+            </li>
+            <li>
+                <a href="admin-organizers.html">
+                    <span class="icon">👥</span>
+                    Organizers
+                </a>
+            </li>
+            <li>
+                <a href="funding.html">
+                    <span class="icon">💰</span>
+                    Funding
+                </a>
+            </li>
+            <li class="active">
+                <a href="admin-settings.html">
+                    <span class="icon">⚙️</span>
+                    Settings
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="btn btn-text btn-icon-text">
+                <span class="icon">🚪</span>
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button type="submit" class="search-btn">🔍</button>
+            </div>
+            <div class="user-menu">
+                <span class="user-name">Admin User</span>
+                <img src="../assets/images/user-avatar.jpg" alt="User Avatar" class="user-avatar">
+            </div>
+        </header>
+
+        <!-- Settings Page Header -->
+        <section class="page-header sticky">
+            <div class="header-content">
+                <h1><span class="header-icon">⚙️</span> Admin Settings</h1>
+                <p class="header-subtext">Manage your account, system permissions, notification preferences, and app-wide controls.</p>
+            </div>
+        </section>
+
+        <!-- Profile Management Section -->
+        <section class="settings-section">
+            <h2>👤 Profile Management</h2>
+            <p class="section-description">Keep your admin profile up to date.</p>
+            
+            <form class="profile-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="New password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password">
+                </div>
+                
+                <div class="form-group">
+                    <label>Profile Picture</label>
+                    <div class="profile-picture-upload">
+                        <img id="profile-preview" src="../assets/images/default-avatar.png" alt="Profile Preview">
+                        <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+                        <label for="profile-picture" class="upload-button">Change Picture</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <span class="icon">🔒</span> Save Changes
+                </button>
+            </form>
+        </section>
+        
+        <!-- Additional settings sections can be added here -->
+    </main>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

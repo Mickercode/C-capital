@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Crawdwall Capital</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/C-capital_Logo-removebg-preview.png" alt="Crawdwall Capital">
+        </div>
+        <ul class="nav-links">
+            <li class="active">
+                <a href="admin.html">
+                    <span class="icon">📋</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="admin-proposals.html">
+                    <span class="icon">📝</span>
+                    Proposals
+                </a>
+            </li>
+            <li>
+                <a href="admin-organizers.html">
+                    <span class="icon">👥</span>
+                    Organizers
+                </a>
+            </li>
+            <li>
+                <a href="funding.html">
+                    <span class="icon">💰</span>
+                    Funding
+                </a>
+            </li>
+            <li>
+                <a href="admin-settings.html">
+                    <span class="icon">⚙️</span>
+                    Settings
+                </a>
+            </li>
+        </ul>
+        <div class="admin-profile">
+            <div class="profile-info">
+                <span class="admin-avatar">👤</span>
+                <div class="admin-details">
+                    <span class="admin-name">Admin</span>
+                    <span class="admin-role">Super Admin</span>
+                </div>
+            </div>
+            <button class="logout-button">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Overview -->
+        <section class="dashboard-overview">
+            <div class="overview-header">
+                <div class="welcome-text">
+                    <h2>Welcome, Admin. Let's fund the future — one event at a time.</h2>
+                    <p>Manage incoming proposals, update statuses, and coordinate with vetted organizers.</p>
+                </div>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card pending">
+                    <div class="stat-header">
+                        <span class="stat-icon">📤</span>
+                        <span class="stat-label">Proposals Pending</span>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-trend positive">
+                        <span class="trend-icon">↗</span>
+                        <span class="trend-value">+2 this week</span>
+                    </div>
+                </div>
+
+                <div class="stat-card approved">
+                    <div class="stat-header">
+                        <span class="stat-icon">✅</span>
+                        <span class="stat-label">Approved</span>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-trend positive">
+                        <span class="trend-icon">↗</span>
+                        <span class="trend-value">+1 this week</span>
+                    </div>
+                </div>
+
+                <div class="stat-card review">
+                    <div class="stat-header">
+                        <span class="stat-icon">🔍</span>
+                        <span class="stat-label">Under Review</span>
+                    </div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-trend neutral">
+                        <span class="trend-icon">→</span>
+                        <span class="trend-value">No change</span>
+                    </div>
+                </div>
+
+                <div class="stat-card total-funding">
+                    <div class="stat-header">
+                        <span class="stat-icon">💰</span>
+                        <span class="stat-label">Total Funding</span>
+                    </div>
+                    <div class="stat-value">₦45M</div>
+                    <div class="stat-trend positive">
+                        <span class="trend-icon">↗</span>
+                        <span class="trend-value">+₦15M this month</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proposal Management Table -->
+        <section class="proposal-management">
+            <div class="section-header">
+                <h2>📂 Submitted Proposals</h2>
+                <div class="table-actions">
+                    <div class="search-box">
+                        <span class="icon">🔍</span>
+                        <input type="text" placeholder="Search proposals..." id="proposal-search">
+                    </div>
+                    <div class="filter-box">
+                        <select id="status-filter">
+                            <option value="">All Statuses</option>
+                            <option value="pending">Pending Review</option>
+                            <option value="under_review">Under Review</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="proposal-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="id">
+                                Proposal ID
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="title">
+                                Event Title
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="organizer">
+                                Organizer Name
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="status">
+                                Status
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="date">
+                                Submission Date
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="proposal-table-body">
+                        <template id="proposal-row-template">
+                            <tr>
+                                <td class="proposal-id"></td>
+                                <td class="event-title"></td>
+                                <td class="organizer-name"></td>
+                                <td>
+                                    <select class="status-badge">
+                                        <option value="pending">⏳ Pending Review</option>
+                                        <option value="under_review">🔍 Under Review</option>
+                                        <option value="approved">✅ Approved</option>
+                                        <option value="rejected">❌ Rejected</option>
+                                    </select>
+                                </td>
+                                <td class="submission-date"></td>
+                                <td class="actions">
+                                    <div class="action-buttons">
+                                        <button class="action-btn view-details" title="View Details">
+                                            <span class="icon">🔍</span>
+                                        </button>
+                                        <button class="action-btn add-note" title="Leave Note">
+                                            <span class="icon">🗒</span>
+                                        </button>
+                                        <button class="action-btn schedule-call" title="Schedule Call">
+                                            <span class="icon">📞</span>
+                                        </button>
+                                        <div class="action-dropdown">
+                                            <button class="action-btn more-actions" title="More Actions">
+                                                <span class="icon">⋮</span>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <button class="approve-proposal">
+                                                    <span class="icon">✅</span> Approve
+                                                </button>
+                                                <button class="reject-proposal">
+                                                    <span class="icon">❌</span> Reject
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <div class="entries-info">
+                    Showing <span id="showing-start">1</span> to <span id="showing-end">10</span> of <span id="total-entries">0</span> entries
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" id="prev-page" disabled>
+                        <span class="icon">←</span> Previous
+                    </button>
+                    <div class="page-numbers" id="page-numbers">
+                        <button class="page-number active">1</button>
+                    </div>
+                    <button class="pagination-btn" id="next-page">
+                        Next <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proposal Detail Modal -->
+        <div id="proposal-detail-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-event-title">Event Title</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="organizer">👤 Organizer Details</button>
+                    <button class="tab-btn" data-tab="event">📅 Event Summary</button>
+                    <button class="tab-btn" data-tab="documents">📄 Documents</button>
+                    <button class="tab-btn" data-tab="budget">💰 Budget & Revenue</button>
+                    <button class="tab-btn" data-tab="notes">📝 Internal Notes</button>
+                    <button class="tab-btn" data-tab="status">🔄 Update Status</button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Organizer Details Tab -->
+                    <div id="organizer-tab" class="tab-pane active">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Organizer Name</label>
+                                <p id="organizer-name"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Email</label>
+                                <p id="organizer-email"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Phone</label>
+                                <p id="organizer-phone"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Company</label>
+                                <p id="organizer-company"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Summary Tab -->
+                    <div id="event-tab" class="tab-pane">
+                        <div class="detail-grid">
+                            <div class="detail-item full-width">
+                                <label>Event Description</label>
+                                <p id="event-description"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Event Type</label>
+                                <p id="event-type"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Event Dates</label>
+                                <p id="event-dates"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Expected Attendees</label>
+                                <p id="event-attendees"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Tab -->
+                    <div id="documents-tab" class="tab-pane">
+                        <div class="document-list">
+                            <div id="proposal-doc" class="document-item">
+                                <span class="icon">📄</span>
+                                <div class="document-info">
+                                    <h4>Proposal Document</h4>
+                                    <p class="file-meta"></p>
+                                </div>
+                                <button class="view-doc">View</button>
+                            </div>
+                            <div id="cac-doc" class="document-item">
+                                <span class="icon">📜</span>
+                                <div class="document-info">
+                                    <h4>CAC Certificate</h4>
+                                    <p class="file-meta"></p>
+                                </div>
+                                <button class="view-doc">View</button>
+                            </div>
+                            <div id="pitch-doc" class="document-item">
+                                <span class="icon">📊</span>
+                                <div class="document-info">
+                                    <h4>Pitch Deck</h4>
+                                    <p class="file-meta"></p>
+                                </div>
+                                <button class="view-doc">View</button>
+                            </div>
+                            <div id="bank-doc" class="document-item">
+                                <span class="icon">🏦</span>
+                                <div class="document-info">
+                                    <h4>Bank Details</h4>
+                                    <p class="file-meta"></p>
+                                </div>
+                                <button class="view-doc">View</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Budget & Revenue Tab -->
+                    <div id="budget-tab" class="tab-pane">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Total Budget</label>
+                                <p id="total-budget"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Expected Revenue</label>
+                                <p id="expected-revenue"></p>
+                            </div>
+                            <div class="detail-item">
+                                <label>Profit Margin</label>
+                                <p id="profit-margin"></p>
+                            </div>
+                            <div class="detail-item full-width">
+                                <label>Budget Breakdown</label>
+                                <div id="budget-chart" class="chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internal Notes Tab -->
+                    <div id="notes-tab" class="tab-pane">
+                        <div class="notes-container">
+                            <div class="add-note-form">
+                                <textarea id="new-note" placeholder="Add a new note..."></textarea>
+                                <button id="save-note" class="primary-button">Add Note</button>
+                            </div>
+                            <div id="notes-list" class="notes-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Update Status Tab -->
+                    <div id="status-tab" class="tab-pane">
+                        <div class="status-container">
+                            <div class="status-update">
+                                <label for="status-update">Current Status</label>
+                                <select id="status-update">
+                                    <option value="submitted">📥 Submitted</option>
+                                    <option value="under_review">🔍 Under Review</option>
+                                    <option value="vetted">✔️ Vetted</option>
+                                    <option value="callback_scheduled">📞 Callback Scheduled</option>
+                                    <option value="approved">✅ Approved</option>
+                                    <option value="rejected">❌ Rejected</option>
+                                </select>
+                            </div>
+                            <div class="status-history">
+                                <h3>Status History</h3>
+                                <div id="status-timeline" class="timeline"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="modal-actions">
+                        <button class="secondary-button return-dashboard">Return to Dashboard</button>
+                        <div class="primary-actions">
+                            <button class="secondary-button notify-organizer">📧 Notify Organizer</button>
+                            <button class="primary-button save-changes">💾 Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rest of the dashboard content will go here -->
+    </main>
+</body>
+</html>
