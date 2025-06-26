@@ -166,3 +166,31 @@ async function resetPassword(email) {
         forgotLink.textContent = 'Forgot Password?'
     }
 }
+
+// Role-based protection function
+export async function requireRole(requiredRole) {
+    const user = await checkAuth();
+    if (!user) {
+        window.location.href = '/signin.html';
+        return false;
+    }
+    const userType = user.user_metadata.user_type;
+    if (userType !== requiredRole) {
+        // Redirect to the correct dashboard for their role
+        if (userType === 'organizer') {
+            window.location.href = '/dashboard/organizer.html';
+        } else {
+            window.location.href = '/dashboard/admin.html';
+        }
+        return false;
+    }
+    return true;
+}
+
+export const auth = {
+    checkAuth,
+    signUp,
+    signIn,
+    signOut,
+    resetPassword
+}
