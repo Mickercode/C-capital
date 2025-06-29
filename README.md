@@ -10,6 +10,21 @@ A modern, responsive admin dashboard for managing event funding proposals. Built
 - Responsive sidebar navigation with icons
 - Admin profile section with avatar
 
+### Organizers Management
+- **Organizers Page**
+  - Sticky header with search and "Add Organizer" button
+  - Sortable and filterable organizers table
+  - Status badges (Verified, Pending, Suspended)
+  - Action buttons (View Profile, Verify, Suspend, Add Note)
+  - Internal Admin Notes Panel for team communication
+
+- **Admin Notes Panel**
+  - Pinned and regular notes sections
+  - Time-stamped entries with author tags
+  - Rich text formatting (bold, italic, links, lists)
+  - Note tagging system for categorization
+  - Pin/unpin, edit, and delete functionality
+
 ### Proposal Management
 - **Sortable Table**
   - Proposal ID
@@ -109,6 +124,7 @@ A modern, responsive admin dashboard for managing event funding proposals. Built
 C-capital/
 ├── dashboard/
 │   ├── admin.html
+│   ├── admin-organizers.html
 │   ├── organizer.html
 │   └── new-proposal.html
 ├── js/
@@ -137,76 +153,242 @@ C-capital/
    - Data population
    - Action handlers
 
+4. **OrganizersManagement**
+   - Organizers table rendering
+   - Search/filter/sort functionality
+   - Status badge management
+   - Action button handlers
+
+5. **AdminNotesPanel**
+   - Rich text formatting
+   - Note creation and management
+   - Pin/unpin functionality
+   - Edit and delete operations
+
 ### State Management
 - Client-side filtering and sorting
 - Pagination calculation
 - Status tracking
 - Form state management
 
-### API Integration Points
-```javascript
-// Load proposals
-async loadProposals()
+## 🔧 Admin Dashboard API Requirements
 
-// Fetch proposal details
-async fetchProposalDetails(proposalId)
+The Admin Dashboard requires the following backend APIs to function properly. This documentation outlines all necessary endpoints for the admin settings page components.
 
-// Update proposal status
-async updateStatus(newStatus)
+### 👤 Profile Management APIs
 
-// Add internal note
-async addNote(content)
+### 👥 Admin Permissions Management APIs
 
-// Save changes
-async saveChanges()
+### 🔔 Notifications Preferences APIs
 
-// Notify organizer
-async notifyOrganizer()
-```
+### 🧩 Platform Configuration APIs
 
-## 🚀 Getting Started
+### 👥 Organizers Management APIs
 
-1. Clone the repository
-2. Open `dashboard/admin.html` in your browser
-3. No build step required - pure HTML, CSS, and JavaScript
+#### 1. List Organizers
+- **Endpoint:** `/admin/organizers`
+- **Method:** GET
+- **Description:** Get a list of all organizers with their details and status
+- **Authentication:** Admin token required
+- **Query Parameters:**
+  - page: number
+  - limit: number
+  - status: "verified" | "pending" | "suspended" | "all"
+  - search: string (search by name, email, or company)
+  - sort: string (field to sort by)
+  - order: "asc" | "desc"
+- **Response:**
+  ```json
+  {
+    "organizers": [
+      {
+        "id": "uuid",
+        "full_name": "string",
+        "email": "string",
+        "company": "string",
+        "status": "verified" | "pending" | "suspended",
+        "date_registered": "timestamp",
+        "last_active": "timestamp",
+        "proposals_count": "number",
+        "approved_proposals": "number"
+      }
+    ],
+    "pagination": {
+      "total": "number",
+      "page": "number",
+      "limit": "number",
+      "pages": "number"
+    }
+  }
+  ```
+- **Error Codes:**
+  - 401: Unauthorized
+  - 403: Insufficient permissions
 
-## 📱 Responsive Design
+#### 2. Get Organizer Details
+- **Endpoint:** `/admin/organizers/{id}`
+- **Method:** GET
+- **Description:** Get detailed information about a specific organizer
+- **Authentication:** Admin token required
+- **Response:**
+  ```json
+  {
+    "id": "uuid",
+    "full_name": "string",
+    "email": "string",
+    "phone": "string",
+    "company": "string",
+    "company_registration": "string",
+    "company_address": "string",
+    "status": "verified" | "pending" | "suspended",
+    "date_registered": "timestamp",
+    "last_active": "timestamp",
+    "proposals": [
+      {
+        "id": "uuid",
+        "title": "string",
+        "status": "string",
+        "submission_date": "timestamp"
+      }
+    ],
+    "documents": [
+      {
+        "id": "uuid",
+        "type": "string",
+        "name": "string",
+        "url": "string",
+        "upload_date": "timestamp"
+      }
+    ]
+  }
+  ```
+- **Error Codes:**
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Organizer not found
 
-- **Desktop** (> 1024px)
-  - Full feature set
-  - Multi-column layouts
-  - Hover states
+#### 3. Update Organizer Status
+- **Endpoint:** `/admin/organizers/{id}/status`
+- **Method:** PUT
+- **Description:** Update an organizer's verification status
+- **Authentication:** Admin token required
+- **Request Body:**
+  ```json
+  {
+    "status": "verified" | "pending" | "suspended",
+    "reason": "string" // Required when suspending
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "id": "uuid",
+    "status": "string",
+    "updated_at": "timestamp",
+    "updated_by": "string" // Admin name
+  }
+  ```
+- **Error Codes:**
+  - 400: Invalid input
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Organizer not found
 
-- **Tablet** (768px - 1024px)
-  - Adapted grid layouts
-  - Touch-optimized buttons
-  - Scrollable tables
+#### 4. Add Admin Note
+- **Endpoint:** `/admin/organizers/{id}/notes`
+- **Method:** POST
+- **Description:** Add an internal admin note about an organizer
+- **Authentication:** Admin token required
+- **Request Body:**
+  ```json
+  {
+    "content": "string",
+    "tags": ["string"],
+    "is_pinned": "boolean"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "note_id": "uuid",
+    "content": "string",
+    "tags": ["string"],
+    "is_pinned": "boolean",
+    "created_at": "timestamp",
+    "created_by": {
+      "id": "uuid",
+      "name": "string"
+    }
+  }
+  ```
+- **Error Codes:**
+  - 400: Invalid input
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Organizer not found
 
-- **Mobile** (< 768px)
-  - Single column layouts
-  - Full-width modals
-  - Touch-friendly navigation
-  - Stacked actions
+#### 5. Get Admin Notes
+- **Endpoint:** `/admin/organizers/{id}/notes`
+- **Method:** GET
+- **Description:** Get all admin notes for a specific organizer
+- **Authentication:** Admin token required
+- **Query Parameters:**
+  - pinned_only: boolean
+- **Response:**
+  ```json
+  {
+    "notes": [
+      {
+        "note_id": "uuid",
+        "content": "string",
+        "tags": ["string"],
+        "is_pinned": "boolean",
+        "created_at": "timestamp",
+        "created_by": {
+          "id": "uuid",
+          "name": "string"
+        },
+        "updated_at": "timestamp",
+        "updated_by": {
+          "id": "uuid",
+          "name": "string"
+        }
+      }
+    ]
+  }
+  ```
+- **Error Codes:**
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Organizer not found
 
-## 🔒 Security Considerations
+#### 6. Update Admin Note
+- **Endpoint:** `/admin/organizers/{organizer_id}/notes/{note_id}`
+- **Method:** PUT
+- **Description:** Update an existing admin note
+- **Authentication:** Admin token required
+- **Request Body:**
+  ```json
+  {
+    "content": "string",
+    "tags": ["string"],
+    "is_pinned": "boolean"
+  }
+  ```
+- **Response:** Updated note object
+- **Error Codes:**
+  - 400: Invalid input
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Note not found
 
-- Input sanitization
-- XSS prevention
-- CSRF protection
-- Secure API endpoints
-- Role-based access control
-
-## 🔄 Future Improvements
-
-1. Real-time updates
-2. Document preview
-3. Email notifications
-4. Analytics dashboard
-5. Bulk actions
-6. Export functionality
-7. Advanced filtering
-8. Audit logging
-
-## 📄 License
-
-Copyright © 2025 Crawdwall Capital. All rights reserved.
+#### 7. Delete Admin Note
+- **Endpoint:** `/admin/organizers/{organizer_id}/notes/{note_id}`
+- **Method:** DELETE
+- **Description:** Delete an admin note
+- **Authentication:** Admin token required
+- **Response:** Status 200 OK
+- **Error Codes:**
+  - 401: Unauthorized
+  - 403: Insufficient permissions
+  - 404: Note not found

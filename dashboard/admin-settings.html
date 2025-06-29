@@ -12,7 +12,7 @@
     <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <div class="sidebar-logo">
-            <img src="../styles/assest/Images/C-capital_Logo-removebg-preview.png" alt="C-capital Logo">
+            <img src="../styles/assest/Images/C-capital_Logo-removebg-preview.png" alt="C-capital Logo" style="max-height: 40px; width: auto;">
         </div>
         <ul class="nav-links">
             <li>
@@ -111,11 +111,363 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-lg">
+                <button type="submit" class="btn btn-primary">
                     <span class="icon">🔒</span> Save Changes
                 </button>
             </form>
         </section>
+        
+        <!-- Admin Permissions Management Section -->
+        <section class="settings-section">
+            <h2>🛡 Admin Permissions</h2>
+            <p class="section-description">Assign or revoke access roles to manage who controls what.</p>
+            
+            <div class="admin-permissions-container">
+                <div class="table-actions">
+                    <button class="btn btn-primary btn-icon-text" id="add-admin-btn">
+                        <span class="icon">➕</span> Add New Admin
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table permissions-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Date Added</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>Super Admin</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Jan 15, 2025</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-icon change-role-btn" title="Change Role">
+                                        <span class="icon">🔄</span>
+                                    </button>
+                                    <button class="btn btn-icon revoke-access-btn" title="Revoke Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jane Smith</td>
+                                <td>Proposal Reviewer</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Feb 22, 2025</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-icon change-role-btn" title="Change Role">
+                                        <span class="icon">🔄</span>
+                                    </button>
+                                    <button class="btn btn-icon revoke-access-btn" title="Revoke Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Robert Johnson</td>
+                                <td>Finance Lead</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Mar 10, 2025</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-icon change-role-btn" title="Change Role">
+                                        <span class="icon">🔄</span>
+                                    </button>
+                                    <button class="btn btn-icon revoke-access-btn" title="Revoke Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Emily Davis</td>
+                                <td>Communications Lead</td>
+                                <td><span class="status-badge status-revoked">Revoked</span></td>
+                                <td>Apr 05, 2025</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-icon change-role-btn" title="Change Role">
+                                        <span class="icon">🔄</span>
+                                    </button>
+                                    <button class="btn btn-icon restore-access-btn" title="Restore Access">
+                                        <span class="icon">✅</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Notifications Preferences Section -->
+        <section class="settings-section">
+            <h2>🔔 Notifications Preferences</h2>
+            <p class="section-description">Choose what notifications you'd like to receive.</p>
+            
+            <form class="notifications-form">
+                <div class="notification-options">
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="new-proposal" name="new-proposal" class="toggle-switch" checked>
+                            <label for="new-proposal" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="new-proposal" class="notification-label">New proposal submitted</label>
+                            <p class="notification-description">Get notified when organizers submit new funding proposals</p>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="callback-request" name="callback-request" class="toggle-switch" checked>
+                            <label for="callback-request" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="callback-request" class="notification-label">Callback request scheduled</label>
+                            <p class="notification-description">Get notified when a callback with an organizer is scheduled</p>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="funding-milestone" name="funding-milestone" class="toggle-switch" checked>
+                            <label for="funding-milestone" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="funding-milestone" class="notification-label">Funding milestone ready for disbursement</label>
+                            <p class="notification-description">Get notified when a funding milestone is ready to be disbursed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="milestone-complete" name="milestone-complete" class="toggle-switch" checked>
+                            <label for="milestone-complete" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="milestone-complete" class="notification-label">Organizer completes a milestone</label>
+                            <p class="notification-description">Get notified when an organizer marks a project milestone as complete</p>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="repayment-progress" name="repayment-progress" class="toggle-switch" checked>
+                            <label for="repayment-progress" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="repayment-progress" class="notification-label">Repayment progress updated</label>
+                            <p class="notification-description">Get notified when there are updates to repayment schedules or payments</p>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-option">
+                        <div class="switch-container">
+                            <input type="checkbox" id="weekly-summary" name="weekly-summary" class="toggle-switch" checked>
+                            <label for="weekly-summary" class="switch-label"></label>
+                        </div>
+                        <div class="notification-details">
+                            <label for="weekly-summary" class="notification-label">Weekly activity summary</label>
+                            <p class="notification-description">Receive a weekly digest of all platform activity</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-icon-text">
+                    <span class="icon">📩</span> Update Preferences
+                </button>
+            </form>
+        </section>
+        
+        <!-- Platform Configuration Settings Section -->
+        <section class="settings-section">
+            <h2>🧩 Platform Settings</h2>
+            <p class="section-description">Customize your internal workflows and communication labels.</p>
+            
+            <div class="platform-settings-container">
+                <!-- Status Labels -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Status Labels</h3>
+                        <button class="btn btn-icon btn-sm" id="add-status-label" title="Add New Label">
+                            <span class="icon">➕</span>
+                        </button>
+                    </div>
+                    <div class="settings-card-body">
+                        <div class="label-list">
+                            <div class="label-item">
+                                <span class="status-badge status-review">Under Review</span>
+                                <button class="btn btn-icon btn-sm edit-label" title="Edit Label">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="label-item">
+                                <span class="status-badge status-approved">Approved</span>
+                                <button class="btn btn-icon btn-sm edit-label" title="Edit Label">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="label-item">
+                                <span class="status-badge status-rejected">Rejected</span>
+                                <button class="btn btn-icon btn-sm edit-label" title="Edit Label">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="label-item">
+                                <span class="status-badge status-pending">Pending</span>
+                                <button class="btn btn-icon btn-sm edit-label" title="Edit Label">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Milestone Templates -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Milestone Templates</h3>
+                        <button class="btn btn-icon btn-sm" id="add-milestone-template" title="Add New Template">
+                            <span class="icon">➕</span>
+                        </button>
+                    </div>
+                    <div class="settings-card-body">
+                        <div class="template-list">
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <h4>3-Stage Plan</h4>
+                                    <p>Initial, Midpoint, Final</p>
+                                </div>
+                                <button class="btn btn-icon btn-sm edit-template" title="Edit Template">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="template-item">
+                                <div class="template-info">
+                                    <h4>4-Stage Plan</h4>
+                                    <p>Planning, Development, Testing, Launch</p>
+                                </div>
+                                <button class="btn btn-icon btn-sm edit-template" title="Edit Template">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Email Notification Template -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Email Notifications Template</h3>
+                    </div>
+                    <div class="settings-card-body">
+                        <div class="form-group">
+                            <label for="default-email">Default Email Message</label>
+                            <textarea id="default-email" name="default-email" rows="5" class="form-control">Dear {recipient},
+
+Thank you for using Crawdwall Capital. {message_body}
+
+Best regards,
+The Crawdwall Capital Team</textarea>
+                        </div>
+                        <div class="template-variables">
+                            <p>Available variables: {recipient}, {message_body}, {proposal_name}, {date}, {amount}</p>
+                        </div>
+                        <button class="btn btn-icon-text btn-sm edit-email-template" title="Edit Template">
+                            <span class="icon">✏️</span> Edit Template
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Custom Event Categories -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h3>Custom Event Categories</h3>
+                        <button class="btn btn-icon btn-sm" id="add-category" title="Add New Category">
+                            <span class="icon">➕</span>
+                        </button>
+                    </div>
+                    <div class="settings-card-body">
+                        <div class="category-list">
+                            <div class="category-item">
+                                <span class="category-badge category-tech">Technology</span>
+                                <button class="btn btn-icon btn-sm edit-category" title="Edit Category">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-badge category-finance">Finance</span>
+                                <button class="btn btn-icon btn-sm edit-category" title="Edit Category">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-badge category-education">Education</span>
+                                <button class="btn btn-icon btn-sm edit-category" title="Edit Category">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-badge category-health">Healthcare</span>
+                                <button class="btn btn-icon btn-sm edit-category" title="Edit Category">
+                                    <span class="icon">✏️</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Save Configuration Button -->
+                <div class="settings-actions">
+                    <button type="button" class="btn btn-primary btn-icon-text" id="save-platform-settings">
+                        <span class="icon">💾</span> Save Configuration
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal for Adding/Editing Admin -->
+        <div class="modal" id="admin-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Add New Admin</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="admin-form">
+                        <div class="form-group">
+                            <label for="admin-name">Full Name</label>
+                            <input type="text" id="admin-name" name="admin-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-email">Email Address</label>
+                            <input type="email" id="admin-email" name="admin-email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-role">Role</label>
+                            <select id="admin-role" name="admin-role" required>
+                                <option value="">Select a role</option>
+                                <option value="super-admin">Super Admin</option>
+                                <option value="proposal-reviewer">Proposal Reviewer</option>
+                                <option value="finance-lead">Finance Lead</option>
+                                <option value="communications-lead">Communications Lead</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-text" id="cancel-admin">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         
         <!-- Additional settings sections can be added here -->
     </main>

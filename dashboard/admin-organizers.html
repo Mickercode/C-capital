@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizers | Crawdwall Capital Admin</title>
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="../assets/images/C-capital_Logo-removebg-preview.png" alt="Crawdwall Capital">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="admin.html">
+                    <span class="icon">📋</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="admin-proposals.html">
+                    <span class="icon">📝</span>
+                    Proposals
+                </a>
+            </li>
+            <li class="active">
+                <a href="admin-organizers.html">
+                    <span class="icon">👥</span>
+                    Organizers
+                </a>
+            </li>
+            <li>
+                <a href="funding.html">
+                    <span class="icon">💰</span>
+                    Funding
+                </a>
+            </li>
+            <li>
+                <a href="admin-settings.html">
+                    <span class="icon">⚙️</span>
+                    Settings
+                </a>
+            </li>
+        </ul>
+        <div class="admin-profile">
+            <div class="profile-info">
+                <span class="admin-avatar">👤</span>
+                <div class="admin-details">
+                    <span class="admin-name">Admin</span>
+                    <span class="admin-role">Super Admin</span>
+                </div>
+            </div>
+            <button class="logout-button">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation with Search -->
+        <header class="top-nav">
+            <div class="search-container">
+                <input type="text" placeholder="Search organizers...">
+                <button type="submit" class="search-btn">🔍</button>
+            </div>
+            <div class="user-menu">
+                <span class="user-name">Admin User</span>
+                <img src="../assets/images/user-avatar.jpg" alt="User Avatar" class="user-avatar">
+            </div>
+        </header>
+
+        <!-- Organizers Header Section -->
+        <section class="organizers-header sticky-header">
+            <div class="section-header-container">
+                <div class="section-title">
+                    <h1>👤 Organizers</h1>
+                    <p class="section-description">Access a complete list of event organizers using Crawdwall Capital. Monitor credibility, proposal status, and engagement.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary add-organizer-btn">
+                        <span class="icon">+</span>
+                        Add Organizer
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organizers Table Section -->
+        <section class="organizers-table-section">
+            <div class="section-header">
+                <h2>📋 Organizer Accounts</h2>
+                <div class="table-actions">
+                    <div class="search-box">
+                        <span class="icon">🔍</span>
+                        <input type="text" placeholder="Search organizers..." id="organizer-search">
+                    </div>
+                    <div class="filter-group">
+                        <select id="verification-filter" class="filter-select">
+                            <option value="">Verification Status</option>
+                            <option value="verified">Verified</option>
+                            <option value="not-verified">Not Verified</option>
+                        </select>
+                        <select id="activity-filter" class="filter-select">
+                            <option value="">Proposal Activity</option>
+                            <option value="high">High Activity</option>
+                            <option value="medium">Medium Activity</option>
+                            <option value="low">Low Activity</option>
+                        </select>
+                        <select id="recent-filter" class="filter-select">
+                            <option value="">Recently Active</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="organizers-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="name">
+                                Organizer Name
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="email">
+                                Email
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="verified">
+                                Verified
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="proposals">
+                                Total Proposals
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="approved">
+                                Approved Projects
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th class="sortable" data-sort="lastActive">
+                                Last Active
+                                <span class="sort-icon">↕️</span>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="organizers-table-body">
+                        <tr>
+                            <td class="organizer-name">TechEvents Nigeria</td>
+                            <td class="organizer-email">contact@techeventsng.com</td>
+                            <td>
+                                <span class="status-badge verified">Yes</span>
+                            </td>
+                            <td class="total-proposals">8</td>
+                            <td class="approved-projects">5</td>
+                            <td class="last-active">June 25, 2025</td>
+                            <td class="actions">
+                                <div class="action-buttons">
+                                    <button class="action-btn view-profile" title="View Profile">
+                                        <span class="icon">👁</span>
+                                    </button>
+                                    <button class="action-btn verify-organizer" title="Verify Organizer">
+                                        <span class="icon">✅</span>
+                                    </button>
+                                    <button class="action-btn suspend-access" title="Suspend Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                    <button class="action-btn add-note" title="Add Note">
+                                        <span class="icon">📝</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="organizer-name">Lagos Business Summit</td>
+                            <td class="organizer-email">info@lagosbusinesssummit.org</td>
+                            <td>
+                                <span class="status-badge verified">Yes</span>
+                            </td>
+                            <td class="total-proposals">12</td>
+                            <td class="approved-projects">9</td>
+                            <td class="last-active">June 26, 2025</td>
+                            <td class="actions">
+                                <div class="action-buttons">
+                                    <button class="action-btn view-profile" title="View Profile">
+                                        <span class="icon">👁</span>
+                                    </button>
+                                    <button class="action-btn verify-organizer" title="Verify Organizer">
+                                        <span class="icon">✅</span>
+                                    </button>
+                                    <button class="action-btn suspend-access" title="Suspend Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                    <button class="action-btn add-note" title="Add Note">
+                                        <span class="icon">📝</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="organizer-name">Abuja Tech Conference</td>
+                            <td class="organizer-email">hello@abujatechconf.com</td>
+                            <td>
+                                <span class="status-badge not-verified">No</span>
+                            </td>
+                            <td class="total-proposals">3</td>
+                            <td class="approved-projects">0</td>
+                            <td class="last-active">June 20, 2025</td>
+                            <td class="actions">
+                                <div class="action-buttons">
+                                    <button class="action-btn view-profile" title="View Profile">
+                                        <span class="icon">👁</span>
+                                    </button>
+                                    <button class="action-btn verify-organizer" title="Verify Organizer">
+                                        <span class="icon">✅</span>
+                                    </button>
+                                    <button class="action-btn suspend-access" title="Suspend Access">
+                                        <span class="icon">🚫</span>
+                                    </button>
+                                    <button class="action-btn add-note" title="Add Note">
+                                        <span class="icon">📝</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <div class="entries-info">
+                    Showing <span id="showing-start">1</span> to <span id="showing-end">10</span> of <span id="total-entries">0</span> entries
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" id="prev-page" disabled>
+                        <span class="icon">←</span> Previous
+                    </button>
+                    <div class="page-numbers" id="page-numbers">
+                        <button class="page-number active">1</button>
+                    </div>
+                    <button class="pagination-btn" id="next-page">
+                        Next <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Notes Panel -->
+        <section class="admin-section notes-panel-section">
+            <div class="section-header">
+                <h2>🗒️ Internal Notes</h2>
+                <p class="section-description">Track communication and feedback between the admin team and organizers.</p>
+            </div>
+
+            <div class="notes-container">
+                <!-- Pinned Notes -->
+                <div class="pinned-notes">
+                    <h3 class="notes-subheading">📌 Pinned Notes</h3>
+                    <div class="note pinned">
+                        <div class="note-header">
+                            <span class="note-author">Posted by Sarah Johnson</span>
+                            <span class="note-timestamp">June 25, 2025 - 10:45 AM</span>
+                            <div class="note-actions">
+                                <button class="note-action unpin-btn" title="Unpin Note">
+                                    <span class="icon">📌</span>
+                                </button>
+                                <button class="note-action edit-btn" title="Edit Note">
+                                    <span class="icon">✏️</span>
+                                </button>
+                                <button class="note-action delete-btn" title="Delete Note">
+                                    <span class="icon">🗑️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="note-content">
+                            <p>All organizers must complete the <strong>new compliance training</strong> by July 15th. Please ensure this is communicated during your next check-in calls.</p>
+                        </div>
+                        <div class="note-tags">
+                            <span class="note-tag">Important</span>
+                            <span class="note-tag">Compliance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Notes -->
+                <div class="regular-notes">
+                    <h3 class="notes-subheading">Recent Notes</h3>
+                    
+                    <div class="note">
+                        <div class="note-header">
+                            <span class="note-author">Posted by Michael Chen</span>
+                            <span class="note-timestamp">June 27, 2025 - 3:22 PM</span>
+                            <div class="note-actions">
+                                <button class="note-action pin-btn" title="Pin Note">
+                                    <span class="icon">📌</span>
+                                </button>
+                                <button class="note-action edit-btn" title="Edit Note">
+                                    <span class="icon">✏️</span>
+                                </button>
+                                <button class="note-action delete-btn" title="Delete Note">
+                                    <span class="icon">🗑️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="note-content">
+                            <p>Had a call with Lagos Business Summit team today. They're planning to submit 3 new proposals next week. Their documentation is excellent as usual.</p>
+                        </div>
+                        <div class="note-tags">
+                            <span class="note-tag">Call Notes</span>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <div class="note-header">
+                            <span class="note-author">Posted by Amina Diallo</span>
+                            <span class="note-timestamp">June 26, 2025 - 11:05 AM</span>
+                            <div class="note-actions">
+                                <button class="note-action pin-btn" title="Pin Note">
+                                    <span class="icon">📌</span>
+                                </button>
+                                <button class="note-action edit-btn" title="Edit Note">
+                                    <span class="icon">✏️</span>
+                                </button>
+                                <button class="note-action delete-btn" title="Delete Note">
+                                    <span class="icon">🗑️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="note-content">
+                            <p>Abuja Tech Conference needs assistance with their proposal format. I've scheduled a training session for next Tuesday at 2pm. <a href="#">Calendar invite sent</a>.</p>
+                        </div>
+                        <div class="note-tags">
+                            <span class="note-tag">Training</span>
+                            <span class="note-tag">Follow-up</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Note Form -->
+                <div class="add-note-container">
+                    <h3 class="notes-subheading">Add New Note</h3>
+                    <form id="add-note-form" class="add-note-form">
+                        <div class="form-group">
+                            <label for="note-content">Note Content</label>
+                            <div class="rich-text-toolbar">
+                                <button type="button" class="format-btn" data-format="bold" title="Bold">
+                                    <span class="icon">B</span>
+                                </button>
+                                <button type="button" class="format-btn" data-format="italic" title="Italic">
+                                    <span class="icon">I</span>
+                                </button>
+                                <button type="button" class="format-btn" data-format="link" title="Add Link">
+                                    <span class="icon">🔗</span>
+                                </button>
+                                <button type="button" class="format-btn" data-format="list" title="Bullet List">
+                                    <span class="icon">•</span>
+                                </button>
+                            </div>
+                            <textarea id="note-content" class="note-textarea" placeholder="Type your note here..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="note-tags">Tags (comma separated)</label>
+                                <input type="text" id="note-tags" class="note-tags-input" placeholder="e.g., Important, Follow-up">
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="pin-note" class="pin-checkbox">
+                                <label for="pin-note">Pin this note</label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary add-note-btn">
+                                <span class="icon">➕</span> Add Note
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- JavaScript for sticky header functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky header functionality
+            const stickyHeader = document.querySelector('.sticky-header');
+            const headerOffset = stickyHeader.offsetTop;
+            
+            function handleScroll() {
+                if (window.pageYOffset > headerOffset) {
+                    stickyHeader.classList.add('scrolled');
+                } else {
+                    stickyHeader.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll);
+            
+            // Add organizer button functionality (placeholder)
+            const addOrganizerBtn = document.querySelector('.add-organizer-btn');
+            if (addOrganizerBtn) {
+                addOrganizerBtn.addEventListener('click', function() {
+                    console.log('Add organizer button clicked');
+                    // Add functionality to open modal or navigate to add organizer page
+                });
+            }
+
+            // Table sorting functionality
+            const sortableHeaders = document.querySelectorAll('.sortable');
+            let currentSort = {
+                column: 'name',
+                direction: 'asc'
+            };
+
+            sortableHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    
+                    // Toggle sort direction or set to asc if it's a new column
+                    if (currentSort.column === column) {
+                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        currentSort.column = column;
+                        currentSort.direction = 'asc';
+                    }
+                    
+                    // Update visual indicators
+                    sortableHeaders.forEach(h => {
+                        h.classList.remove('sort-asc', 'sort-desc');
+                    });
+                    
+                    this.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+                    
+                    // Sort the table
+                    sortTable(column, currentSort.direction);
+                });
+            });
+
+            function sortTable(column, direction) {
+                const tbody = document.getElementById('organizers-table-body');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                
+                // Sort the array of rows
+                rows.sort((a, b) => {
+                    let aValue, bValue;
+                    
+                    switch(column) {
+                        case 'name':
+                        case 'email':
+                            aValue = a.querySelector(`.organizer-${column}`).textContent.trim().toLowerCase();
+                            bValue = b.querySelector(`.organizer-${column}`).textContent.trim().toLowerCase();
+                            break;
+                        case 'verified':
+                            aValue = a.querySelector('.status-badge').textContent.trim();
+                            bValue = b.querySelector('.status-badge').textContent.trim();
+                            break;
+                        case 'proposals':
+                            aValue = parseInt(a.querySelector('.total-proposals').textContent);
+                            bValue = parseInt(b.querySelector('.total-proposals').textContent);
+                            break;
+                        case 'approved':
+                            aValue = parseInt(a.querySelector('.approved-projects').textContent);
+                            bValue = parseInt(b.querySelector('.approved-projects').textContent);
+                            break;
+                        case 'lastActive':
+                            aValue = new Date(a.querySelector('.last-active').textContent);
+                            bValue = new Date(b.querySelector('.last-active').textContent);
+                            break;
+                        default:
+                            return 0;
+                    }
+                    
+                    // Compare values based on direction
+                    if (direction === 'asc') {
+                        return aValue > bValue ? 1 : -1;
+                    } else {
+                        return aValue < bValue ? 1 : -1;
+                    }
+                });
+                
+                // Remove all existing rows
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                
+                // Add sorted rows back
+                rows.forEach(row => {
+                    tbody.appendChild(row);
+                });
+                
+                // Update pagination info
+                updatePaginationInfo();
+            }
+            
+            // Filter functionality
+            const searchInput = document.getElementById('organizer-search');
+            const verificationFilter = document.getElementById('verification-filter');
+            const activityFilter = document.getElementById('activity-filter');
+            const recentFilter = document.getElementById('recent-filter');
+            
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const verificationValue = verificationFilter.value;
+                const activityValue = activityFilter.value;
+                const recentValue = recentFilter.value;
+                
+                const rows = document.querySelectorAll('#organizers-table-body tr');
+                
+                rows.forEach(row => {
+                    const name = row.querySelector('.organizer-name').textContent.toLowerCase();
+                    const email = row.querySelector('.organizer-email').textContent.toLowerCase();
+                    const isVerified = row.querySelector('.status-badge').textContent.trim() === 'Yes';
+                    const totalProposals = parseInt(row.querySelector('.total-proposals').textContent);
+                    const lastActiveDate = new Date(row.querySelector('.last-active').textContent);
+                    
+                    // Search term filter
+                    const matchesSearch = searchTerm === '' || 
+                                         name.includes(searchTerm) || 
+                                         email.includes(searchTerm);
+                    
+                    // Verification filter
+                    const matchesVerification = verificationValue === '' || 
+                                              (verificationValue === 'verified' && isVerified) || 
+                                              (verificationValue === 'not-verified' && !isVerified);
+                    
+                    // Activity level filter
+                    let matchesActivity = true;
+                    if (activityValue !== '') {
+                        if (activityValue === 'high' && totalProposals < 8) matchesActivity = false;
+                        if (activityValue === 'medium' && (totalProposals < 3 || totalProposals > 7)) matchesActivity = false;
+                        if (activityValue === 'low' && totalProposals > 2) matchesActivity = false;
+                    }
+                    
+                    // Recent activity filter
+                    let matchesRecent = true;
+                    if (recentValue !== '') {
+                        const today = new Date();
+                        const diffTime = Math.abs(today - lastActiveDate);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        
+                        if (recentValue === 'today' && diffDays > 1) matchesRecent = false;
+                        if (recentValue === 'week' && diffDays > 7) matchesRecent = false;
+                        if (recentValue === 'month' && diffDays > 30) matchesRecent = false;
+                    }
+                    
+                    // Show/hide row based on all filters
+                    if (matchesSearch && matchesVerification && matchesActivity && matchesRecent) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                updatePaginationInfo();
+            }
+            
+            // Add event listeners for filters
+            searchInput.addEventListener('input', applyFilters);
+            verificationFilter.addEventListener('change', applyFilters);
+            activityFilter.addEventListener('change', applyFilters);
+            recentFilter.addEventListener('change', applyFilters);
+            
+            // Action button functionality
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = this.classList.contains('view-profile') ? 'view' :
+                                  this.classList.contains('verify-organizer') ? 'verify' :
+                                  this.classList.contains('suspend-access') ? 'suspend' : 'note';
+                    
+                    const row = this.closest('tr');
+                    const organizerName = row.querySelector('.organizer-name').textContent;
+                    
+                    console.log(`${action} action for ${organizerName}`);
+                    // Implement actual functionality for each action
+                });
+            });
+            
+            // Update pagination info
+            function updatePaginationInfo() {
+                const visibleRows = document.querySelectorAll('#organizers-table-body tr:not([style*="display: none"])');
+                const totalEntries = document.getElementById('total-entries');
+                const showingStart = document.getElementById('showing-start');
+                const showingEnd = document.getElementById('showing-end');
+                
+                totalEntries.textContent = visibleRows.length;
+                showingStart.textContent = visibleRows.length > 0 ? '1' : '0';
+                showingEnd.textContent = visibleRows.length;
+            }
+            
+            // Initialize pagination info
+            updatePaginationInfo();
+        });
+    </script>
+</body>
+</html>

@@ -411,6 +411,7 @@
     box-shadow: 0 4px 12px rgba(11, 30, 57, 0.1);
     display: none;
     z-index: 10;
+    overflow: hidden;
 }
 
 .action-dropdown:hover .dropdown-menu {
@@ -440,9 +441,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--navy-blue-10);
+    padding: var(--spacing-md) 0;
+    margin-top: var(--spacing-md);
 }
 
 .entries-info {
@@ -457,26 +457,26 @@
 }
 
 .pagination-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     border: 1px solid var(--navy-blue-20);
     border-radius: 4px;
     background: var(--white);
     color: var(--navy-blue);
     cursor: pointer;
     transition: all 0.2s var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: var(--navy-blue-5);
+    border-color: var(--navy-blue);
 }
 
 .pagination-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-.pagination-btn:not(:disabled):hover {
-    background: var(--navy-blue-5);
-    border-color: var(--navy-blue);
 }
 
 .page-numbers {
@@ -961,7 +961,7 @@
 }
 
 .primary-button:hover {
-    background: var(--navy-blue-dark);
+    background: var(--navy-blue-80);
     transform: translateY(-1px);
 }
 
@@ -1075,7 +1075,7 @@
 }
 
 .save-button:hover {
-    background-color: var(--navy-blue-dark);
+    background-color: var(--navy-blue-80);
 }
 
 /* Admin Settings Page Styles */
@@ -1205,7 +1205,7 @@ input[type="file"] {
 
 .save-button {
     grid-column: 1 / -1;
-    background-color: var(--primary-color);
+    background-color: var(--navy-blue);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -1220,7 +1220,7 @@ input[type="file"] {
 }
 
 .save-button:hover {
-    background-color: var(--primary-dark);
+    background-color: var(--navy-blue-80);
 }
 
 /* Responsive adjustments */
@@ -1436,7 +1436,7 @@ input[type="file"] {
 }
 
 .btn-primary:hover, .btn-primary:focus {
-    background-color: var(--navy-blue-dark);
+    background-color: var(--navy-blue-80);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -1567,7 +1567,7 @@ input[type="file"] {
 }
 
 .save-button:hover {
-    background-color: var(--navy-blue-dark);
+    background-color: var(--navy-blue-80);
 }
 
 /* Apply button styles to existing buttons */
@@ -1592,7 +1592,7 @@ input[type="file"] {
 }
 
 .modal-actions .primary-button:hover {
-    background-color: var(--navy-blue-dark);
+    background-color: var(--navy-blue-80);
 }
 
 .modal-actions .secondary-button {
@@ -1603,4 +1603,745 @@ input[type="file"] {
 
 .modal-actions .secondary-button:hover {
     background-color: var(--border-color);
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: var(--white);
+    border-bottom: 1px solid var(--navy-blue-10);
+    margin-bottom: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(11, 30, 57, 0.06);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-xl);
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 30px;
+    font-size: 0.95rem;
+    transition: all 0.2s var(--transition-smooth);
+    background-color: var(--navy-blue-5);
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: var(--navy-blue);
+    box-shadow: 0 0 0 3px rgba(11, 30, 57, 0.1);
+    background-color: var(--white);
+}
+
+.search-container .search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--navy-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.search-container .search-btn:hover {
+    background: var(--navy-blue-80);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.search-container::before {
+    content: "🔍";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--navy-blue-60);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.user-name {
+    color: var(--navy-blue);
+    font-weight: 500;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--navy-blue-20);
+}
+
+/* Filter dropdown styling */
+.filter-dropdown {
+    position: relative;
+    margin-left: var(--spacing-md);
+}
+
+.filter-button {
+    background: var(--navy-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.filter-button:hover {
+    background: var(--navy-blue-80);
+}
+
+.filter-button .icon {
+    font-size: 1rem;
+}
+
+.filter-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: var(--spacing-sm);
+    background: var(--white);
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 8px;
+    padding: var(--spacing-xs);
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(11, 30, 57, 0.15);
+    display: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.filter-menu.active {
+    display: block;
+}
+
+.filter-option {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--navy-blue-10);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    transition: background 0.2s var(--transition-smooth);
+}
+
+.filter-option:last-child {
+    border-bottom: none;
+}
+
+.filter-option:hover {
+    background: var(--navy-blue-5);
+}
+
+.filter-option input[type="checkbox"] {
+    accent-color: var(--navy-blue);
+}
+
+.filter-option label {
+    flex: 1;
+    color: var(--navy-blue);
+    cursor: pointer;
+}
+
+.filter-actions {
+    display: flex;
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--navy-blue-10);
+    background: var(--navy-blue-5);
+}
+
+.filter-actions button {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.filter-actions .apply-filters {
+    background: var(--navy-blue);
+    color: var(--white);
+    margin-right: var(--spacing-sm);
+}
+
+.filter-actions .apply-filters:hover {
+    background: var(--navy-blue-80);
+}
+
+.filter-actions .clear-filters {
+    background: var(--white);
+    color: var(--navy-blue);
+    border: 1px solid var(--navy-blue-20);
+}
+
+.filter-actions .clear-filters:hover {
+    border-color: var(--navy-blue);
+    background: var(--navy-blue-5);
+}
+
+/* Organizers Page Styles */
+.organizers-header {
+    background: var(--white);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 2px 8px rgba(11, 30, 57, 0.06);
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    transition: box-shadow 0.3s var(--transition-smooth);
+}
+
+.sticky-header.scrolled {
+    box-shadow: 0 4px 12px rgba(11, 30, 57, 0.1);
+}
+
+.section-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.section-title h1 {
+    color: var(--navy-blue);
+    font-size: 2rem;
+    margin: 0 0 var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.section-description {
+    color: var(--navy-blue-60);
+    font-size: 1.1rem;
+    margin: 0;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.header-actions {
+    flex-shrink: 0;
+}
+
+.add-organizer-btn {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.add-organizer-btn:hover {
+    background-color: var(--navy-blue-80);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(11, 30, 57, 0.15);
+}
+
+.add-organizer-btn .icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .section-header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .header-actions {
+        width: 100%;
+    }
+    
+    .add-organizer-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Organizers Table Styles */
+.organizers-table-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 2px 8px rgba(11, 30, 57, 0.06);
+}
+
+.organizers-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.organizers-table th,
+.organizers-table td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    border-bottom: 1px solid var(--navy-blue-10);
+}
+
+.organizers-table th {
+    background: var(--navy-blue-5);
+    color: var(--navy-blue);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.organizers-table tbody tr {
+    transition: background 0.2s var(--transition-smooth);
+}
+
+.organizers-table tbody tr:hover {
+    background: var(--navy-blue-5);
+}
+
+/* Status Badge Styles */
+.status-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-badge.verified {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.status-badge.not-verified {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+/* Filter Group Styles */
+.filter-group {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--navy-blue);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.filter-select:hover,
+.filter-select:focus {
+    border-color: var(--navy-blue);
+    outline: none;
+}
+
+/* Action Buttons for Organizers */
+.organizers-table .action-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: flex-start;
+}
+
+.organizers-table .action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--navy-blue);
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.organizers-table .action-btn:hover {
+    background: var(--navy-blue-5);
+    border-color: var(--navy-blue);
+    transform: translateY(-1px);
+}
+
+.organizers-table .action-btn.view-profile:hover {
+    color: var(--navy-blue);
+    border-color: var(--navy-blue);
+}
+
+.organizers-table .action-btn.verify-organizer:hover {
+    color: #065F46;
+    border-color: #065F46;
+}
+
+.organizers-table .action-btn.suspend-access:hover {
+    color: #991B1B;
+    border-color: #991B1B;
+}
+
+.organizers-table .action-btn.add-note:hover {
+    color: #0369A1;
+    border-color: #0369A1;
+}
+
+/* Responsive adjustments for organizers table */
+@media (max-width: 1024px) {
+    .organizers-table {
+        min-width: 900px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .table-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .filter-select {
+        flex: 1;
+    }
+}
+
+/* Admin Notes Panel Styles */
+.notes-panel-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 2px 8px rgba(11, 30, 57, 0.06);
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.notes-subheading {
+    font-size: 1.1rem;
+    color: var(--navy-blue);
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* Note Card Styles */
+.note {
+    background: var(--white);
+    border: 1px solid var(--navy-blue-10);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.note:hover {
+    box-shadow: 0 2px 8px rgba(11, 30, 57, 0.08);
+}
+
+.note.pinned {
+    border-left: 4px solid var(--navy-blue);
+    background-color: var(--navy-blue-5);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.note-author {
+    font-weight: 500;
+    color: var(--navy-blue);
+}
+
+.note-timestamp {
+    color: var(--navy-blue-60);
+    font-size: 0.9rem;
+}
+
+.note-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.note-action {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--navy-blue);
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+}
+
+.note-action:hover {
+    background: var(--navy-blue-5);
+    border-color: var(--navy-blue);
+}
+
+.note-action.pin-btn:hover,
+.note-action.unpin-btn:hover {
+    color: var(--navy-blue);
+    border-color: var(--navy-blue);
+}
+
+.note-action.edit-btn:hover {
+    color: #0369A1;
+    border-color: #0369A1;
+}
+
+.note-action.delete-btn:hover {
+    color: #991B1B;
+    border-color: #991B1B;
+}
+
+.note-content {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.note-content p {
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.note-content a {
+    color: var(--navy-blue);
+    text-decoration: underline;
+}
+
+.note-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.note-tag {
+    background: var(--navy-blue-10);
+    color: var(--navy-blue);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Add Note Form Styles */
+.add-note-container {
+    background: var(--navy-blue-5);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+}
+
+.add-note-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-row {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--navy-blue);
+}
+
+.note-textarea {
+    min-height: 120px;
+    padding: var(--spacing-md);
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 6px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.note-textarea:focus {
+    outline: none;
+    border-color: var(--navy-blue);
+    box-shadow: 0 0 0 2px rgba(11, 30, 57, 0.1);
+}
+
+.note-tags-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--navy-blue-20);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.note-tags-input:focus {
+    outline: none;
+    border-color: var(--navy-blue);
+    box-shadow: 0 0 0 2px rgba(11, 30, 57, 0.1);
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.pin-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--navy-blue);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-sm);
+}
+
+.add-note-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* Rich Text Toolbar */
+.rich-text-toolbar {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--white);
+    border: 1px solid var(--navy-blue-20);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+}
+
+.format-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--navy-blue-10);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--navy-blue);
+    cursor: pointer;
+    transition: all 0.2s var(--transition-smooth);
+    font-weight: bold;
+}
+
+.format-btn:hover {
+    background: var(--navy-blue-5);
+    border-color: var(--navy-blue);
+}
+
+.format-btn.active {
+    background: var(--navy-blue-10);
+    border-color: var(--navy-blue);
+}
+
+/* Responsive adjustments for notes panel */
+@media (max-width: 768px) {
+    .note-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+    
+    .note-actions {
+        margin-top: var(--spacing-xs);
+        align-self: flex-end;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
 }

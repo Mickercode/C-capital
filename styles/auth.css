@@ -124,19 +124,20 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: var(--navy-blue);
+    color: var(--white);
 }
 
 .btn-outline {
     background-color: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--navy-blue);
+    border: 1px solid var(--navy-blue);
 }
 
 .btn-primary:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(11, 30, 57, 0.15);
+    background-color: var(--navy-blue-80);
 }
 
 .btn-outline:hover {
